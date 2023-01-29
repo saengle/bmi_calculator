@@ -55,6 +55,7 @@ class _MainScreenState extends State<MainScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Form(
+            key: _formKey,
             child: Column(
               children: [
                 TextFormField(
@@ -92,18 +93,19 @@ class _MainScreenState extends State<MainScreen> {
                   onPressed: () {
                     if (_formKey.currentState?.validate() == false) {
                       return;
-                    }
-                    save();
+                    } else {
+                      save();
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ResultScreen(
-                          height: double.parse(_heightController.text),
-                          weight: double.parse(_weightController.text),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ResultScreen(
+                            height: double.parse(_heightController.text),
+                            weight: double.parse(_weightController.text),
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    }
                   },
                   /* currentState가 Null 일 수 있으니 ? 붙임. */
                   child: const Text('결과'),
